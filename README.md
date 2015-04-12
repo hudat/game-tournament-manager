@@ -1,4 +1,2 @@
-# meteor-tutorial
-Meteor Tutorial book progress: http://www.meteor-tutorial.org/
-
-Goal: Tighten the Meteor chops
+# Game Tournament Manager
+App used to manage multiple teams and their games
