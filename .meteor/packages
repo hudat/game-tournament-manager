@@ -6,4 +6,5 @@
 
 meteor-platform
 msavin:mongol
-insecure
+accounts-password
+accounts-ui
