@@ -1,5 +1,6 @@
 Meteor.publish('teams', function(){
-  return Teams.find();
+  // only return logged in user's teams
+  return Teams.find({ownerId: this.userId});
 });
 
 Meteor.publish('games', function(){
