@@ -12,3 +12,38 @@ Games.allow({
   },
   fetch: ['ownerId']
 });
+
+Meteor.methods({
+  gamesInsert: function(teamOneId, teamTwoId){
+    var teamOne = Teams.findOne({_id: teamOneId});
+    var teamTwo = Teams.findOne({_id: teamTwoId});
+
+    var teamOneData = {
+      id: teamOne._id,
+      name: teamOne.name,
+      score: 0
+    };
+
+    var teamTwoData = {
+      id: teamTwo._id,
+      name: teamTwo.name,
+      score: 0
+    };
+
+    var game = {
+      ownerId: Meteor.userId(),
+      createdAt: new Date(),
+      teams: [teamOneData, teamTwoData],
+      completed: false
+    };
+
+    var gameId = Games.insert(game);
+
+    //Update each team's cached array of game ids
+    Teams.update({_id: teamOneData.id}, {$addToSet: {gameIds: gameId} });
+    Teams.update({_id: teamTwoData.id}, {$addToSet: {gameIds: gameId} });
+
+    //Copy Meteor.insert(), which just returns the _id
+    return gameId;
+  }
+})
