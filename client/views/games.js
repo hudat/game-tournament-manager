@@ -41,6 +41,7 @@ Template.games.events({
 
     var game = {
       createdAt: new Date(),
+      ownerId: Meteor.userId(),
       teams: [team1, team2],
       completed: false
     }
