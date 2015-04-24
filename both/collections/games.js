@@ -19,7 +19,7 @@ Meteor.methods({
     var teamTwo = Teams.findOne({_id: teamTwoId});
 
     if(!teamOne || !teamTwo) {
-      throw new Error("One of the teams doesn't exist in the database");
+      throw new Meteor.Error("invalid-parameters", "One of the teams doesn't exist in the database"); 
     }
 
     var teamOneData = {
