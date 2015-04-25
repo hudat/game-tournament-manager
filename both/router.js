@@ -15,3 +15,17 @@ Router.route('/teams', {
     return Meteor.subscribe("teams");
   }
 });
+
+var requireLogin = function(){
+  if(!Meteor.user()){
+    if(Meteor.loggingIn()){
+      this.render("loading");
+    } else {
+      this.render("accessdenied");
+    }
+  } else {
+    this.next();
+  }
+}
+
+Router.onBeforeAction(requireLogin);
